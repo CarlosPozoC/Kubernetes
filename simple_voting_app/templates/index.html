@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote Now</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .btn-tiger {
+            background: linear-gradient(45deg, orange, black, orange);
+            color: white;
+            font-weight: bold;
+            border: none;
+            background-size: 200%;
+        }
+
+        .btn-tiger:hover {
+            background-position: right;
+        }
+
+        @keyframes tiger-stripes {
+            0% { background-position: left; }
+            100% { background-position: right; }
+        }
+
+        .btn-belchi {
+            background-color: black;
+            color: white;
+            font-weight: bold;
+            border: none;
+        }
+
+        .btn-belchi:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Vote for Your Candidate</h1>
+        <div class="card p-4 shadow-sm">
+            <form action="/vote" method="POST">
+                <!-- Hidden voter ID -->
+                <input type="hidden" name="voter_id" value="{{ voter_id }}">
+
+                <div class="mb-3">
+                    <label class="form-label">Choose a candidate:</label>
+                    <div class="d-grid gap-3">
+                        {% for candidate, _ in candidates.items() %}
+                        {% if candidate == "Tiger" %}
+                        <button class="btn btn-tiger" type="submit" name="candidate" value="Tiger">Tiger</button>
+                        {% elif candidate == "Belchi" %}
+                        <button class="btn btn-belchi" type="submit" name="candidate" value="Belchi">Belchi</button>
+                        {% else %}
+                        <button class="btn btn-secondary" type="submit" name="candidate" value="{{ candidate }}">{{ candidate }}</button>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+
